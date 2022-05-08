@@ -11,6 +11,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.sql.DataSource;
 
@@ -47,5 +48,12 @@ public class DatabaseConfiguration {
     @ConfigurationProperties(prefix = "mybatis.configuration")
     public org.apache.ibatis.session.Configuration mybatisConfig(){
         return new org.apache.ibatis.session.Configuration();
+    }
+    @Bean
+    public CommonsMultipartResolver multipartResolver(){
+        CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
+        commonsMultipartResolver.setDefaultEncoding("UTF-8");
+        commonsMultipartResolver.setMaxUploadSizePerFile(5*1024*1024);
+        return commonsMultipartResolver;
     }
 }

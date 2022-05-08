@@ -1,6 +1,7 @@
 package com.example.demo1.board.mapper;
 
 import com.example.demo1.board.dto.BoardDto;
+import com.example.demo1.board.dto.BoardFileDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -13,4 +14,5 @@ public interface BoardMapper {
     BoardDto selectBoardDetail(int bidx) throws Exception;
     void updateBoard(BoardDto board) throws Exception;
     void deleteBoard(int bidx) throws Exception;
+    void insertBoardFileList(List<BoardFileDto> list) throws Exception;
 }

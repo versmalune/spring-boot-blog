@@ -9,12 +9,28 @@
 		    ORDER BY bidx DESC
 		]]>
     </select>
-    <insert id="insertBoard" parameterType="com.example.demo1.board.dto.BoardDto">
+    <insert id="insertBoard" parameterType="com.example.demo1.board.dto.BoardDto" useGeneratedKeys="true" keyProperty="bidx">
 		<![CDATA[
-        INSERT INTO board (title, content, writer)
-        VALUES (#{title}, #{content}, #{userid})
+        INSERT INTO board (title, content)
+        VALUES (#{title}, #{content})
         ]]>
 	</insert>
+    <insert id="insertBoardFileList" parameterType="com.example.demo1.board.dto.BoardFileDto">
+        <![CDATA[
+			INSERT INTO files
+			(bidx, original_file_name, stored_file_path, file_size, creator_id)
+			VALUES
+		]]>
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.bidx},
+            #{item.originalFileName},
+            #{item.storedFilePath},
+            #{item.fileSize},
+            'USER'
+            )
+        </foreach>
+    </insert>
     <update id="updateHitCount" parameterType="int">
         <![CDATA[
         UPDATE board

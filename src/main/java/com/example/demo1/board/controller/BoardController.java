@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -27,8 +28,8 @@ public class BoardController {
         return "/boardWrite";
     }
     @RequestMapping("/board/insertBoard")
-    public String insertBoard(@ModelAttribute BoardDto board) throws Exception {
-        boardService.insertBoard(board);
+    public String insertBoard(@ModelAttribute BoardDto board, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception {
+        boardService.insertBoard(board, multipartHttpServletRequest);
         return "redirect:/board";
     }
     @RequestMapping("/board/openBoardDetail")
