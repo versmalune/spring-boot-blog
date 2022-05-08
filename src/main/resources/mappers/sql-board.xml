@@ -11,8 +11,8 @@
     </select>
     <insert id="insertBoard" parameterType="com.example.demo1.board.dto.BoardDto">
 		<![CDATA[
-        INSERT INTO board (title, content)
-        VALUES (#{title}, #{content})
+        INSERT INTO board (title, content, writer)
+        VALUES (#{title}, #{content}, #{userid})
         ]]>
 	</insert>
     <update id="updateHitCount" parameterType="int">

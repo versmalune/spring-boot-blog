@@ -9,23 +9,14 @@
 <body>
 <div class="container">
   <h2>게시글 상세 화면</h2>
-  <!-- ADD START -->
   <form id="frm" method="post">
-    <!-- ADD END -->
     <table class="board_detail">
-      <caption>게시글 상세내용</caption>
       <tbody>
       <tr>
         <th scope="row">글 번호</th>
         <td th:text="${board.bidx}"></td>
         <th scope="row">조회수</th>
         <td th:text="${board.viewcnt}"></td>
-      </tr>
-      <tr>
-        <th scope="row">작성자</th>
-        <td th:text="${board.writer}"></td>
-        <th scope="row">게시판명</th>
-        <td>(BoardName)</td>
       </tr>
       <tr>
         <th scope="row">제목</th>
@@ -43,19 +34,21 @@
     <input type="hidden" name="bidx" th:value="${board.bidx}">
   </form>
 
-  <input type="button" id="list" value="목록으로">
-  <input type="button" id="edit" value="수정하기">
-  <input type="button" id="delete" value="삭제하기">
+  <div class="btn-group">
+    <button class="btn btn-primary" id="list">LIST</button>
+    <button class="btn btn-primary" id="edit">EDIT</button>
+    <button class="btn btn-primary" id="delete">DELETE</button>
+  </div>
 
   <div class="container">
-    <label for="content">comment</label>
+    <label for="comcontent">COMMENT</label>
     <form name="commentInsertForm">
       <div class="input-group">
         <input type="hidden" name="bidx" th:value="${board.bidx}"/>
         <input type="text" class="form-control" id="comcontent" name="comcontent" placeholder="COMMENT">
         <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" name="commentInsertBtn">SUBMIT</button>
-               </span>
+          <button class="btn btn-primary btn-block" type="button" name="commentInsertBtn">SUBMIT</button>
+        </span>
       </div>
     </form>
   </div>
@@ -107,9 +100,9 @@
           var a ='';
           $.each(data, function(key, value){
             a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
-            a += '<a onclick="commentUpdate('+value.cidx+',\''+value.comcontent+'\');"> 수정 </a>';
-            a += '<a onclick="commentDelete('+value.cidx+');"> 삭제 </a> </div>';
-            a += '<div class="commentContent'+value.cidx+'"> <p> 내용 : '+value.comcontent +'</p>';
+            a += '<button onclick="commentUpdate('+value.cidx+',\''+value.comcontent+'\');"> 수정 </button>';
+            a += '<button onclick="commentDelete('+value.cidx+');"> 삭제 </button> </div>';
+            a += '<div class="commentContent'+value.cidx+'"> <p> '+ value.comcontent +'</p>';
             a += '</div></div>';
           });
           $(".commentList").html(a);
@@ -135,7 +128,7 @@
       var a ='';
       a += '<div class="input-group">';
       a += '<input type="text" class="form-control" name="content_'+cidx+'" value="'+comcontent+'"/>';
-      a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentUpdateProc('+cidx+');">수정</button> </span>';
+      a += '<span class="input-group-btn"><button class="btn btn-primary btn-lg" type="button" onclick="commentUpdateProc('+cidx+');">수정</button> </span>';
       a += '</div>';
       $('.commentContent'+cidx).html(a);
 
