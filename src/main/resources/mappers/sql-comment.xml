@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.example.demo1.board.mapper.CommentMapper">
+    <select id="commentList" resultType="com.example.demo1.board.dto.CommentDto">
+        <![CDATA[
+        SELECT *
+        FROM comments
+        ]]>
+    </select>
+
+
+    <insert id="commentInsert" parameterType="com.example.demo1.board.dto.CommentDto">
+        <![CDATA[
+        INSERT INTO comments (cidx, bidx, comcontent, comwriter)
+        VALUES(#{cidx}, #{bidx}, #{comcontent}, #{comwriter})
+        ]]>
+    </insert>
+
+    <update id="commentUpdate" parameterType="com.example.demo1.board.dto.CommentDto">
+        <![CDATA[
+        UPDATE comments
+        SET comcontent = #{comcontent}
+        WHERE cidx = #{cidx}
+        ]]>
+    </update>
+
+    <delete id="commentDelete" parameterType="int">
+        <![CDATA[
+        DELETE FROM comments WHERE cidx = #{cidx}
+        ]]>
+    </delete>
+</mapper>

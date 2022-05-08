@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>board</title>
   <link rel="stylesheet" th:href="@{/css/style.css}"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
 <div class="container">
@@ -29,8 +30,7 @@
       <tr>
         <th scope="row">제목</th>
         <td colspan="3">
-          <input type="text" id="title" name="title"
-                 th:value="${board.title}"/>
+          <input type="text" id="title" name="title" th:value="${board.title}"/>
         </td>
       </tr>
       <tr>
@@ -46,6 +46,27 @@
   <input type="button" id="list" value="목록으로">
   <input type="button" id="edit" value="수정하기">
   <input type="button" id="delete" value="삭제하기">
+
+  <div class="container">
+    <label for="content">comment</label>
+    <form name="commentInsertForm">
+      <div class="input-group">
+        <input type="hidden" name="bidx" th:value="${board.bidx}"/>
+        <input type="text" class="form-control" id="comcontent" name="comcontent" placeholder="COMMENT">
+        <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" name="commentInsertBtn">SUBMIT</button>
+               </span>
+      </div>
+    </form>
+  </div>
+
+  <div class="container">
+    <div class="commentList"></div>
+  </div>
+</div>
+
+
+
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript">
@@ -67,6 +88,87 @@
       });
     })
   </script>
+
+  <script>
+    var bidx = '${board.bidx}';
+
+    $('[name=commentInsertBtn]').click(function(){
+      var insertData = $('[name=commentInsertForm]').serialize();
+      commentInsert(insertData);
+    });
+
+    function commentList(){
+      console.log(bidx)
+      $.ajax({
+        url : '/comment/list',
+        type : 'get',
+        data : {'bidx':bidx},
+        success : function(data){
+          var a ='';
+          $.each(data, function(key, value){
+            a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
+            a += '<a onclick="commentUpdate('+value.cidx+',\''+value.comcontent+'\');"> 수정 </a>';
+            a += '<a onclick="commentDelete('+value.cidx+');"> 삭제 </a> </div>';
+            a += '<div class="commentContent'+value.cidx+'"> <p> 내용 : '+value.comcontent +'</p>';
+            a += '</div></div>';
+          });
+          $(".commentList").html(a);
+        }
+      });
+    }
+
+    function commentInsert(insertData){
+      $.ajax({
+        url : '/comment/insert',
+        type : 'post',
+        data : insertData,
+        success : function(data){
+          if(data == 1) {
+            commentList();
+            $('[name=comcontent]').val('');
+          }
+        }
+      });
+    }
+
+    function commentUpdate(cidx, comcontent){
+      var a ='';
+      a += '<div class="input-group">';
+      a += '<input type="text" class="form-control" name="content_'+cidx+'" value="'+comcontent+'"/>';
+      a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentUpdateProc('+cidx+');">수정</button> </span>';
+      a += '</div>';
+      $('.commentContent'+cidx).html(a);
+
+    }
+
+    //댓글 수정
+    function commentUpdateProc(cidx){
+      var updateContent = $('[name=content_'+cidx+']').val();
+      $.ajax({
+        url : '/comment/update',
+        type : 'post',
+        data : {'comcontent' : updateContent, 'cidx' : cidx},
+        success : function(data){
+          if(data == 1) commentList(bidx);
+        }
+      });
+    }
+
+    function commentDelete(cidx){
+      $.ajax({
+        url : '/comment/delete/'+cidx,
+        type : 'post',
+        success : function(data){
+          if(data == 1) commentList(bidx);
+        }
+      });
+    }
+
+    $(document).ready(function(){
+      commentList(); //페이지 로딩시 댓글 목록 출력
+    });
+  </script>
+
 </div>
 </body>
 </html>
