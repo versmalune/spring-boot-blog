@@ -9,6 +9,16 @@
 		    ORDER BY bidx DESC
 		]]>
     </select>
+    <select id="selectBoardFileList" parameterType="int" resultType="com.example.demo1.board.dto.BoardFileDto">
+        <![CDATA[
+        SELECT fidx, bidx, original_file_name,
+            FORMAT(ROUND(file_size / 1024), 0) AS file_size
+        FROM
+            files
+        WHERE
+            bidx = #{bidx}
+        ]]>
+    </select>
     <insert id="insertBoard" parameterType="com.example.demo1.board.dto.BoardDto" useGeneratedKeys="true" keyProperty="bidx">
 		<![CDATA[
         INSERT INTO board (title, content)

@@ -2,6 +2,8 @@ package com.example.demo1.board.dto;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class BoardDto {
     private int bidx;
@@ -9,4 +11,5 @@ public class BoardDto {
     private String content;
     private String writer;
     private int viewcnt;
+    private List<BoardFileDto> fileList;
 }
