@@ -21,8 +21,8 @@ public class CommentController {
 
     @RequestMapping("/list")
     @ResponseBody
-    public List<CommentDto> commentList(Model model) throws Exception {
-        return commentService.commentListService();
+    public List<CommentDto> commentList(@RequestParam int bidx) throws Exception {
+        return commentService.commentListService(bidx);
     }
     @RequestMapping("/insert")
     @ResponseBody

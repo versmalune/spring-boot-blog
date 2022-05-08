@@ -12,8 +12,8 @@ public class CommentServiceImpl implements CommentService {
     @Autowired
     private CommentMapper commentMapper;
     @Override
-    public List<CommentDto> commentListService() throws Exception {
-        return commentMapper.commentList();
+    public List<CommentDto> commentListService(int bidx) throws Exception {
+        return commentMapper.commentList(bidx);
     }
     @Override
     public int insertCommentService(CommentDto comment) throws Exception {

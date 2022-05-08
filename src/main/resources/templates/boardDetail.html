@@ -86,8 +86,8 @@
     })
   </script>
 
-  <script>
-    var bidx = '${board.bidx}';
+  <script type="text/javascript">
+    var bidx = [[${board.bidx}]];
 
     $('[name=commentInsertBtn]').click(function(){
       var insertData = $('[name=commentInsertForm]').serialize();
@@ -95,7 +95,6 @@
     });
 
     function commentList(){
-      console.log(bidx)
       $.ajax({
         url : '/comment/list',
         type : 'get',
@@ -104,8 +103,8 @@
           var a ='';
           $.each(data, function(key, value){
             a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
-            a += '<button onclick="commentUpdate('+value.cidx+',\''+value.comcontent+'\');"> 수정 </button>';
-            a += '<button onclick="commentDelete('+value.cidx+');"> 삭제 </button> </div>';
+            a += '<button onclick="commentUpdate('+value.cidx+',\''+value.comcontent+'\');"> EDIT </button>';
+            a += '<button onclick="commentDelete('+value.cidx+');"> DELETE </button> </div>';
             a += '<div class="commentContent'+value.cidx+'"> <p> '+ value.comcontent +'</p>';
             a += '</div></div>';
           });

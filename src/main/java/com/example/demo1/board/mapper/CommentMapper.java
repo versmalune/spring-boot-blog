@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper
 @Repository("com.example.demo1.board.mapper.CommentMapper")
 public interface CommentMapper {
-    List<CommentDto> commentList() throws Exception;
+    List<CommentDto> commentList(int bidx) throws Exception;
     int commentInsert(CommentDto comment) throws Exception;
     int commentUpdate(CommentDto comment) throws Exception;
     int commentDelete(int cidx) throws Exception;
