@@ -1,4 +1,4 @@
-package com.example.demo1.user.dto;
+package com.example.demo1.user.model;
 
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,11 +9,10 @@ import java.util.Collection;
 import java.util.Collections;
 
 @Data
-public class UserDto implements UserDetails {
-    private int userNo;
-    private String userId;
-    private String userPw;
+public class UserVO implements UserDetails {
+    private int id;
     private String userName;
+    private String userPw;
     private String userAuth;
 
     @Override
@@ -21,16 +20,9 @@ public class UserDto implements UserDetails {
         return Collections.singletonList(new SimpleGrantedAuthority(this.userAuth));
     }
     @Override
-    public String getPassword() {
-        return this.userPw;
-    }
+    public String getUsername() { return this.userName; }
     @Override
-    public String getUsername(){
-        return this.userId;
-    }
-    public String getUserName(){
-        return this.userName;
-    }
+    public String getPassword() { return this.userPw; }
     @Override
     public boolean isAccountNonExpired(){
         return true;
