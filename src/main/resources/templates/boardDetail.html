@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:float="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
   <title>board</title>
@@ -37,14 +37,13 @@
     <a th:each="list : ${board.fileList}" th:text="|${list.originalFileName}(${list.fileSize} kb)|"></a>
   </div>
 
-  <div class="btn-group">
-    <button class="btn btn-primary" id="list">LIST</button>
-    <button class="btn btn-primary" id="edit">EDIT</button>
-    <button class="btn btn-primary" id="delete">DELETE</button>
+  <div class="btn-group" align="right">
+      <button class="btn btn-primary" id="list">LIST</button>
+      <button class="btn btn-primary" id="edit">EDIT</button>
+      <button class="btn btn-primary" id="delete">DELETE</button>
   </div>
 
   <div class="container">
-    <label for="comcontent">COMMENT</label>
     <form name="commentInsertForm">
       <div class="input-group">
         <input type="hidden" name="bidx" th:value="${board.bidx}"/>
@@ -102,9 +101,9 @@
           var a ='';
           $.each(data, function(key, value){
             a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
-            a += '<button onclick="commentUpdate('+value.cidx+',\''+value.comcontent+'\');"> EDIT </button>';
-            a += '<button onclick="commentDelete('+value.cidx+');"> DELETE </button> </div>';
-            a += '<div class="commentContent'+value.cidx+'"> <p> '+ value.comcontent +'</p>';
+            a += '<div class="commentContent'+value.cidx+'"> <p> '+ value.comcontent;
+            a += '<button style="float:right" onclick="commentUpdate('+value.cidx+',\''+value.comcontent+'\');"> EDIT </button>';
+            a += '<button style="float:right" onclick="commentDelete('+value.cidx+');"> DELETE </button> </p> </div>';
             a += '</div></div>';
           });
           $(".commentList").html(a);
@@ -136,7 +135,6 @@
 
     }
 
-    //댓글 수정
     function commentUpdateProc(cidx){
       var updateContent = $('[name=content_'+cidx+']').val();
       $.ajax({
@@ -160,7 +158,7 @@
     }
 
     $(document).ready(function(){
-      commentList(); //페이지 로딩시 댓글 목록 출력
+      commentList();
     });
   </script>
 
