@@ -24,6 +24,7 @@ public class BoardServiceImpl implements BoardService {
     }
     @Override
     public void insertBoard(BoardDto board, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception {
+        board.setContent(board.getContent().replaceAll("<p>", "").replaceAll("</p>", ""));
         boardMapper.insertBoard(board);
         List<BoardFileDto> list = fileUtils.parseFileInfo(board.getBidx(), multipartHttpServletRequest);
         if (CollectionUtils.isEmpty(list) == false) {
