@@ -38,7 +38,7 @@ public class UserController {
     @GetMapping("/user_access")
     public String userAccess(Model model, Authentication authentication) {
         UserVO userVO = (UserVO) authentication.getPrincipal();
-        //model.addAttribute("info", userVO.getUserId() +"의 "+ userVO.getUserName()+ "님");      //유저 아이디
-        return "redirect:/board";
+        model.addAttribute("info", userVO.getUsername() +"의 "+ userVO.getUserAuth()+ "님");      //유저 아이디
+        return "home";
     }
 }
