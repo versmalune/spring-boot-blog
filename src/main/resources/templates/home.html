@@ -4,12 +4,14 @@
       xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>main</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body>
-<h2>회원 전용 페이지</h2>
+<h2>SIMPLE BLOG</h2>
 ID : <span sec:authentication="name"></span> <br>
+<!--
 소유 권한 : <span sec:authentication="authorities"></span> <br>
-
-
+-->
+<a href="/board" class="btn">BOARD</a>
 </body>
 </html>
