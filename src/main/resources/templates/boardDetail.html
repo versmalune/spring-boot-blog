@@ -1,56 +1,55 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:float="http://www.w3.org/1999/xhtml">
-<head>
-  <meta charset="UTF-8">
-  <title>board</title>
-  <link rel="stylesheet" th:href="@{/css/style.css}"/>
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="fragments/head" :: head></th:block>
 <body>
-<div class="container">
-  <h2>게시글 상세 화면</h2>
-  <form id="frm" method="post">
-    <table class="board_detail">
-      <tbody>
-      <tr>
-        <th scope="row">글 번호</th>
-        <td th:text="${board.bidx}"></td>
-        <th scope="row">조회수</th>
-        <td th:text="${board.viewcnt}"></td>
-      </tr>
-      <tr>
-        <th scope="row">제목</th>
-        <td colspan="3">
-          <input type="text" id="title" name="title" th:value="${board.title}"/>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="4" class="view_text">
-          <textarea title="content" id="content" name="content" th:utext="${board.content}"></textarea>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-    <input type="hidden" name="bidx" th:value="${board.bidx}">
-  </form>
 
-  <div class="file_list">
+  <div class="container">
+    <th:block th:replace="fragments/header :: header"></th:block>
+    <h3><a href="/board">BOARD 1</a></h3>
+    <form id="frm" method="post">
+      <table class="board_detail">
+        <tbody>
+        <tr>
+          <th scope="row">글 번호</th>
+          <td th:text="${board.bidx}"></td>
+          <th scope="row">조회수</th>
+          <td th:text="${board.viewcnt}"></td>
+        </tr>
+        <tr>
+          <th scope="row">제목</th>
+          <td colspan="3" id="title" name="title" th:text="${board.title}"/></td>
+        </tr>
+        <tr>
+          <td colspan="4" class="view_text" th:utext="${board.content}">
+            <!--
+            <textarea title="content" id="content" name="content" th:utext="${board.content}"></textarea> <-->
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <input type="hidden" name="bidx" th:value="${board.bidx}">
+    </form>
+  </div>
+
+  <div class="container">
     <a th:each="list : ${board.fileList}" th:text="|${list.originalFileName}(${list.fileSize} kb)|"></a>
   </div>
 
-  <div class="btn-group" align="right">
+  <div class="btn-under-group" align="right">
       <button class="btn btn-primary" id="list">LIST</button>
+      <!--
       <button class="btn btn-primary" id="edit">EDIT</button>
+      -->
       <button class="btn btn-primary" id="delete">DELETE</button>
   </div>
 
   <div class="container">
     <form name="commentInsertForm">
-      <div class="input-group">
+      <div class="comment-group">
         <input type="hidden" name="bidx" th:value="${board.bidx}"/>
-        <input type="text" class="form-control" id="comcontent" name="comcontent" placeholder="COMMENT">
-        <span class="input-group-btn">
-          <button class="btn btn-primary btn-block" type="button" name="commentInsertBtn">SUBMIT</button>
-        </span>
+        <input type="text" class="comment-insert" id="comcontent" name="comcontent" placeholder="COMMENT">
+        <button class="btn-com" type="button" name="commentInsertBtn">SUBMIT</button>
       </div>
     </form>
   </div>
@@ -102,8 +101,8 @@
           $.each(data, function(key, value){
             a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
             a += '<div class="commentContent'+value.cidx+'"> <p> '+ value.comcontent;
-            a += '<button style="float:right" onclick="commentUpdate('+value.cidx+',\''+value.comcontent+'\');"> EDIT </button>';
-            a += '<button style="float:right" onclick="commentDelete('+value.cidx+');"> DELETE </button> </p> </div>';
+            a += '<button class="btn-com2" style="float:right" onclick="commentDelete('+value.cidx+');"> DELETE </button>';
+            a += '<button class="btn-com2" style="float:right" onclick="commentUpdate('+value.cidx+',\''+value.comcontent+'\');"> EDIT </button> </p> </div>';
             a += '</div></div>';
           });
           $(".commentList").html(a);
@@ -127,9 +126,9 @@
 
     function commentUpdate(cidx, comcontent){
       var a ='';
-      a += '<div class="input-group">';
-      a += '<input type="text" class="form-control" name="content_'+cidx+'" value="'+comcontent+'"/>';
-      a += '<span class="input-group-btn"><button class="btn btn-primary btn-lg" type="button" onclick="commentUpdateProc('+cidx+');">수정</button> </span>';
+      a += '<div class="comment-group">';
+      a += '<input type="text" class="comment-insert" name="content_'+cidx+'" value="'+comcontent+'"/>';
+      a += '<button class="btn-com" type="button" onclick="commentUpdateProc('+cidx+');">EDIT</button>';
       a += '</div>';
       $('.commentContent'+cidx).html(a);
 

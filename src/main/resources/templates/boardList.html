@@ -1,18 +1,15 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8" />
-  <title>게시판</title>
-  <link rel="stylesheet" th:href="@{/css/style.css}"/>
-</head>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<th:block th:replace="fragments/head" :: head></th:block>
 <body>
 <div class="container">
-  <h2>게시판 목록</h2>
+  <th:block th:replace="fragments/header :: header"></th:block>
+  <h3><a href="/board">BOARD 1</a></h3>
   <table class="board_list">
     <thead>
     <tr>
       <th scope="col">글번호</th>
-      <th scope="col">제목</th>
+      <th scope="col" class="title">제목</th>
       <th scope="col">조회수</th>
     </tr>
     </thead>
@@ -29,7 +26,7 @@
     </tr>
     </tbody>
   </table>
-  <a href="board/openBoardWrite" class="btn">글 쓰기</a>
+  <a href="board/openBoardWrite" class="btn-write">글 쓰기</a>
 </div>
 </body>
 </html>
