@@ -4,9 +4,7 @@ import com.example.demo1.board.dto.BoardDto;
 import com.example.demo1.board.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import java.util.List;
@@ -17,35 +15,35 @@ public class BoardController {
     @Autowired
     private BoardService boardService;
 
-    @RequestMapping("")
+    @GetMapping("")
     public ModelAndView boardList() throws Exception {
         ModelAndView mv = new ModelAndView("boardList");
         List<BoardDto> list = boardService.selectBoardList();
         mv.addObject("list", list);
         return mv;
     }
-    @RequestMapping("/openBoardWrite")
+    @GetMapping("/openBoardWrite")
     public String boardWrite() throws Exception {
         return "/boardWrite";
     }
-    @RequestMapping("/insertBoard")
+    @PostMapping("/insertBoard")
     public String insertBoard(@ModelAttribute BoardDto board, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception {
         boardService.insertBoard(board, multipartHttpServletRequest);
         return "redirect:/board";
     }
-    @RequestMapping("/openBoardDetail")
+    @GetMapping("/openBoardDetail")
     public ModelAndView openBoardDetail(@RequestParam int id) throws Exception {
         ModelAndView mv = new ModelAndView("boardDetail");
         BoardDto board = boardService.selectBoardDetail(id);
         mv.addObject("board", board);
         return mv;
     }
-    @RequestMapping("/updateBoard")
+    @PostMapping("/updateBoard")
     public String updateBoard(BoardDto board) throws Exception {
         boardService.updateBoard(board);
         return "redirect:/board";
     }
-    @RequestMapping("/deleteBoard")
+    @GetMapping("/deleteBoard")
     public String deleteBoard(int id) throws Exception {
         boardService.deleteBoard(id);
         return "redirect:/board";
