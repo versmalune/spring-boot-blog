@@ -3,34 +3,26 @@
 
 <mapper namespace="com.example.demo1.board.mapper.BoardMapper">
     <select id="selectBoardList" resultType="com.example.demo1.board.dto.BoardDto">
-        <![CDATA[
 			SELECT id, title, view_cnt
 		    FROM board
 		    ORDER BY id DESC
-		]]>
     </select>
     <select id="selectBoardFileList" parameterType="int" resultType="com.example.demo1.board.dto.BoardFileDto">
-        <![CDATA[
         SELECT id, bid, original_file_name,
             FORMAT(ROUND(file_size / 1024), 0) AS file_size
         FROM
             files
         WHERE
             bid = #{bid}
-        ]]>
     </select>
     <insert id="insertBoard" parameterType="com.example.demo1.board.dto.BoardDto" useGeneratedKeys="true" keyProperty="id">
-		<![CDATA[
-        INSERT INTO board (title, content)
+		INSERT INTO board (title, content)
         VALUES (#{title}, #{content})
-        ]]>
 	</insert>
     <insert id="insertBoardFileList" parameterType="com.example.demo1.board.dto.BoardFileDto">
-        <![CDATA[
 			INSERT INTO files
 			(bid, original_file_name, stored_file_path, file_size, creator_id)
 			VALUES
-		]]>
         <foreach collection="list" item="item" separator=",">
             (
             #{item.bid},
@@ -41,34 +33,27 @@
             )
         </foreach>
     </insert>
+
     <update id="updateHitCount" parameterType="int">
-        <![CDATA[
         UPDATE board
         SET view_cnt = view_cnt+1
         WHERE id = #{id}
-        ]]>
     </update>
 
     <select id="selectBoardDetail" parameterType="int" resultType="com.example.demo1.board.dto.BoardDto">
-        <![CDATA[
         SELECT id, title, content, view_cnt
         FROM board
         WHERE id = #{id}
-        ]]>
     </select>
 
     <update id="updateBoard" parameterType="com.example.demo1.board.dto.BoardDto">
-        <![CDATA[
         UPDATE board
         SET content = #{content}
         WHERE id = #{id}
-        ]]>
     </update>
 
     <delete id="deleteBoard" parameterType="int">
-        <![CDATA[
         DELETE FROM board
         WHERE id = #{id}
-        ]]>
     </delete>
 </mapper>

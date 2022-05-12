@@ -3,32 +3,24 @@
 
 <mapper namespace="com.example.demo1.board.mapper.CommentMapper">
     <select id="commentList" parameterType="int" resultType="com.example.demo1.board.dto.CommentDto">
-        <![CDATA[
         SELECT *
         FROM comments
         WHERE bid = #{bid}
-        ]]>
     </select>
 
 
     <insert id="commentInsert" parameterType="com.example.demo1.board.dto.CommentDto">
-        <![CDATA[
         INSERT INTO comments (id, bid, comcontent, comwriter)
         VALUES(#{id}, #{bid}, #{comcontent}, #{comwriter})
-        ]]>
     </insert>
 
     <update id="commentUpdate" parameterType="com.example.demo1.board.dto.CommentDto">
-        <![CDATA[
         UPDATE comments
         SET comcontent = #{comcontent}
         WHERE id = #{id}
-        ]]>
     </update>
 
     <delete id="commentDelete" parameterType="int">
-        <![CDATA[
         DELETE FROM comments WHERE id = #{id}
-        ]]>
     </delete>
 </mapper>
