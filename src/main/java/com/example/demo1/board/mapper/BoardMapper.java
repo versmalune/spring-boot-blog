@@ -8,12 +8,12 @@ import java.util.List;
 
 @Mapper
 public interface BoardMapper {
-    List<BoardDto> selectBoardList() throws Exception;
-    void insertBoard(BoardDto board) throws Exception;
-    void updateHitCount(int id) throws Exception;
-    BoardDto selectBoardDetail(int id) throws Exception;
-    void updateBoard(BoardDto board) throws Exception;
-    void deleteBoard(int id) throws Exception;
-    void insertBoardFileList(List<BoardFileDto> list) throws Exception;
-    List<BoardFileDto> selectBoardFileList(int id) throws Exception;
+    List<BoardDto> selectBoardList();
+    void insertBoard(BoardDto board);
+    void updateHitCount(int id);
+    BoardDto selectBoardDetail(int id);
+    void updateBoard(BoardDto board);
+    void deleteBoard(int id);
+    void insertBoardFileList(List<BoardFileDto> list);
+    List<BoardFileDto> selectBoardFileList(int id);
 }

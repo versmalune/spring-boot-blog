@@ -16,35 +16,35 @@ public class BoardController {
     private BoardService boardService;
 
     @GetMapping("")
-    public ModelAndView boardList() throws Exception {
+    public ModelAndView boardList(){
         ModelAndView mv = new ModelAndView("boardList");
         List<BoardDto> list = boardService.selectBoardList();
         mv.addObject("list", list);
         return mv;
     }
     @GetMapping("/openBoardWrite")
-    public String boardWrite() throws Exception {
+    public String boardWrite(){
         return "/boardWrite";
     }
     @PostMapping("/insertBoard")
-    public String insertBoard(@ModelAttribute BoardDto board, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception {
+    public String insertBoard(@ModelAttribute BoardDto board, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception{
         boardService.insertBoard(board, multipartHttpServletRequest);
         return "redirect:/board";
     }
     @GetMapping("/openBoardDetail")
-    public ModelAndView openBoardDetail(@RequestParam int id) throws Exception {
+    public ModelAndView openBoardDetail(@RequestParam int id){
         ModelAndView mv = new ModelAndView("boardDetail");
         BoardDto board = boardService.selectBoardDetail(id);
         mv.addObject("board", board);
         return mv;
     }
     @PostMapping("/updateBoard")
-    public String updateBoard(BoardDto board) throws Exception {
+    public String updateBoard(BoardDto board){
         boardService.updateBoard(board);
         return "redirect:/board";
     }
     @GetMapping("/deleteBoard")
-    public String deleteBoard(int id) throws Exception {
+    public String deleteBoard(int id){
         boardService.deleteBoard(id);
         return "redirect:/board";
     }

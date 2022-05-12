@@ -12,19 +12,19 @@ public class CommentServiceImpl implements CommentService {
     @Autowired
     private CommentMapper commentMapper;
     @Override
-    public List<CommentDto> commentListService(int bid) throws Exception {
+    public List<CommentDto> commentListService(int bid) {
         return commentMapper.commentList(bid);
     }
     @Override
-    public int insertCommentService(CommentDto comment) throws Exception {
+    public int insertCommentService(CommentDto comment){
         return commentMapper.commentInsert(comment);
     }
     @Override
-    public int updateCommentService(CommentDto comment) throws Exception {
+    public int updateCommentService(CommentDto comment){
         return commentMapper.commentUpdate(comment);
     }
     @Override
-    public int deleteCommentService(int id) throws Exception {
+    public int deleteCommentService(int id){
         return commentMapper.commentDelete(id);
     }
 }

@@ -17,12 +17,12 @@ public class CommentController {
 
     @GetMapping("/list")
     @ResponseBody
-    public List<CommentDto> commentList(@RequestParam int id) throws Exception {
+    public List<CommentDto> commentList(@RequestParam int id){
         return commentService.commentListService(id);
     }
     @PostMapping ("/insert")
     @ResponseBody
-    public int commentInsert(@RequestParam int bid, @RequestParam String comcontent) throws Exception {
+    public int commentInsert(@RequestParam int bid, @RequestParam String comcontent){
         CommentDto comment = new CommentDto();
         comment.setBid(bid);
         comment.setComcontent(comcontent);
@@ -31,7 +31,7 @@ public class CommentController {
     }
     @PostMapping("/update")
     @ResponseBody
-    private int commentUpdate(@RequestParam int id, @RequestParam String comcontent) throws Exception {
+    private int commentUpdate(@RequestParam int id, @RequestParam String comcontent){
         CommentDto comment = new CommentDto();
         comment.setId(id);
         comment.setComcontent(comcontent);
@@ -39,7 +39,7 @@ public class CommentController {
     }
     @GetMapping("/delete/{id}")
     @ResponseBody
-    private int commentDelete(@PathVariable int id) throws Exception{
+    private int commentDelete(@PathVariable int id){
         return commentService.deleteCommentService(id);
     }
 }

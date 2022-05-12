@@ -18,11 +18,11 @@ public class BoardServiceImpl implements BoardService {
     @Autowired
     private FileUtils fileUtils;
     @Override
-    public List<BoardDto> selectBoardList() throws Exception {
+    public List<BoardDto> selectBoardList(){
         return boardMapper.selectBoardList();
     }
     @Override
-    public void insertBoard(BoardDto board, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception {
+    public void insertBoard(BoardDto board, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception{
         board.setContent(board.getContent().replaceAll("<p>", "").replaceAll("</p>", "")); //
         boardMapper.insertBoard(board);
         List<BoardFileDto> list = fileUtils.parseFileInfo(board.getId(), multipartHttpServletRequest);
@@ -31,7 +31,7 @@ public class BoardServiceImpl implements BoardService {
         }
     }
     @Override
-    public BoardDto selectBoardDetail(int id) throws Exception {
+    public BoardDto selectBoardDetail(int id){
         BoardDto board = boardMapper.selectBoardDetail(id);
         List<BoardFileDto> fileList = boardMapper.selectBoardFileList(id);
         System.out.println(fileList);
@@ -41,11 +41,11 @@ public class BoardServiceImpl implements BoardService {
         return board;
     }
     @Override
-    public void updateBoard(BoardDto board) throws Exception {
+    public void updateBoard(BoardDto board){
         boardMapper.updateBoard(board);
     }
     @Override
-    public void deleteBoard(int id) throws Exception {
+    public void deleteBoard(int id){
         boardMapper.deleteBoard(id);
     }
 }
