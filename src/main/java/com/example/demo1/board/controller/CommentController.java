@@ -4,7 +4,6 @@ import com.example.demo1.board.dto.CommentDto;
 import com.example.demo1.board.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,7 +27,7 @@ public class CommentController {
     @ResponseBody
     public int commentInsert(@RequestParam int bidx, @RequestParam String comcontent) throws Exception {
         CommentDto comment = new CommentDto();
-        comment.setBidx(bidx);
+        comment.setBid(bidx);
         comment.setComcontent(comcontent);
         comment.setComwriter("testuser");
         return commentService.insertCommentService(comment);
@@ -37,7 +36,7 @@ public class CommentController {
     @ResponseBody
     private int commentUpdate(@RequestParam int cidx, @RequestParam String comcontent) throws Exception {
         CommentDto comment = new CommentDto();
-        comment.setCidx(cidx);
+        comment.setId(cidx);
         comment.setComcontent(comcontent);
         return commentService.updateCommentService(comment);
     }

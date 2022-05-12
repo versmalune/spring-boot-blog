@@ -34,10 +34,6 @@ body {
   font-family: 'NanumGothic','나눔고딕',dotum, "Helvetica Neue", Helvetica, Verdana, Arial, Sans-Serief;
 }
 
-h1, h2, h3 {
-  font-size: 1.5em;
-}
-
 p {
   margin: 0;
   padding: 0;
@@ -163,10 +159,8 @@ caption {
 
 .btn {
   margin: 5px;
-  padding: 5px 11px;
   color: #fff !important;
   display: inline-block;
-  background-color: #7D7F82;
   vertical-align: middle;
   border-radius: 0 !important;
   cursor: pointer;

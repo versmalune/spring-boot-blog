@@ -57,7 +57,7 @@ public class FileUtils {
 
                     newFileName = Long.toString(System.nanoTime()) + originalFileExtension;
                     BoardFileDto boardFile = new BoardFileDto();
-                    boardFile.setBidx(bidx);
+                    boardFile.setBid(bidx);
                     boardFile.setFileSize(multipartFile.getSize());
                     boardFile.setOriginalFileName(multipartFile.getOriginalFilename());
                     boardFile.setStoredFilePath(path + "/" + newFileName);

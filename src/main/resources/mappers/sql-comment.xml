@@ -6,15 +6,15 @@
         <![CDATA[
         SELECT *
         FROM comments
-        WHERE bidx = #{bidx}
+        WHERE bid = #{bid}
         ]]>
     </select>
 
 
     <insert id="commentInsert" parameterType="com.example.demo1.board.dto.CommentDto">
         <![CDATA[
-        INSERT INTO comments (cidx, bidx, comcontent, comwriter)
-        VALUES(#{cidx}, #{bidx}, #{comcontent}, #{comwriter})
+        INSERT INTO comments (id, bid, comcontent, comwriter)
+        VALUES(#{id}, #{bid}, #{comcontent}, #{comwriter})
         ]]>
     </insert>
 
@@ -22,13 +22,13 @@
         <![CDATA[
         UPDATE comments
         SET comcontent = #{comcontent}
-        WHERE cidx = #{cidx}
+        WHERE id = #{id}
         ]]>
     </update>
 
     <delete id="commentDelete" parameterType="int">
         <![CDATA[
-        DELETE FROM comments WHERE cidx = #{cidx}
+        DELETE FROM comments WHERE id = #{id}
         ]]>
     </delete>
 </mapper>

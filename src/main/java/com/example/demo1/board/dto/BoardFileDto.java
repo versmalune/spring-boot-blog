@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class BoardFileDto {
-    private int fidx;
-    private int bidx;
+    private int id;
+    private int bid;
     private String originalFileName;
     private String storedFilePath;
     private long fileSize;

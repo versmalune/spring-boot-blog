@@ -4,9 +4,9 @@
 <mapper namespace="com.example.demo1.board.mapper.BoardMapper">
     <select id="selectBoardList" resultType="com.example.demo1.board.dto.BoardDto">
         <![CDATA[
-			SELECT bidx, title, viewcnt
+			SELECT id, title, view_cnt
 		    FROM board
-		    ORDER BY bidx DESC
+		    ORDER BY id DESC
 		]]>
     </select>
     <select id="selectBoardFileList" parameterType="int" resultType="com.example.demo1.board.dto.BoardFileDto">
@@ -16,7 +16,7 @@
         FROM
             files
         WHERE
-            bidx = #{bidx}
+            id = #{id}
         ]]>
     </select>
     <insert id="insertBoard" parameterType="com.example.demo1.board.dto.BoardDto" useGeneratedKeys="true" keyProperty="bidx">
@@ -28,12 +28,12 @@
     <insert id="insertBoardFileList" parameterType="com.example.demo1.board.dto.BoardFileDto">
         <![CDATA[
 			INSERT INTO files
-			(bidx, original_file_name, stored_file_path, file_size, creator_id)
+			(id, original_file_name, stored_file_path, file_size, creator_id)
 			VALUES
 		]]>
         <foreach collection="list" item="item" separator=",">
             (
-            #{item.bidx},
+            #{item.id},
             #{item.originalFileName},
             #{item.storedFilePath},
             #{item.fileSize},
@@ -44,16 +44,16 @@
     <update id="updateHitCount" parameterType="int">
         <![CDATA[
         UPDATE board
-        SET viewcnt = viewcnt+1
-        WHERE bidx = #{bidx}
+        SET view_cnt = view_cnt+1
+        WHERE bid = #{bid}
         ]]>
     </update>
 
     <select id="selectBoardDetail" parameterType="int" resultType="com.example.demo1.board.dto.BoardDto">
         <![CDATA[
-        SELECT bidx, title, content, viewcnt
+        SELECT id, title, content, viewcnt
         FROM board
-        WHERE bidx = #{bidx}
+        WHERE id = #{id}
         ]]>
     </select>
 
@@ -61,16 +61,14 @@
         <![CDATA[
         UPDATE board
         SET content = #{content}
-        WHERE bidx = #{bidx}
+        WHERE id = #{id}
         ]]>
     </update>
 
     <delete id="deleteBoard" parameterType="int">
         <![CDATA[
         DELETE FROM board
-        WHERE bidx = #{bidx}
+        WHERE id = #{id}
         ]]>
     </delete>
-
-
 </mapper>

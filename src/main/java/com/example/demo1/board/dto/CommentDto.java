@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class CommentDto {
-    private int cidx;
-    private int bidx;
+    private int id;
+    private int bid;
     private String comcontent;
     private String comwriter;
 }

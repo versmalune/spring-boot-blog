@@ -7,9 +7,8 @@ import com.example.demo1.board.mapper.BoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 @Service
@@ -26,7 +25,7 @@ public class BoardServiceImpl implements BoardService {
     public void insertBoard(BoardDto board, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception {
         board.setContent(board.getContent().replaceAll("<p>", "").replaceAll("</p>", "")); //
         boardMapper.insertBoard(board);
-        List<BoardFileDto> list = fileUtils.parseFileInfo(board.getBidx(), multipartHttpServletRequest);
+        List<BoardFileDto> list = fileUtils.parseFileInfo(board.getId(), multipartHttpServletRequest);
         if (CollectionUtils.isEmpty(list) == false) {
             boardMapper.insertBoardFileList(list);
         }

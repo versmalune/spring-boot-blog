@@ -12,13 +12,13 @@
         <tbody>
         <tr>
           <th scope="row">글 번호</th>
-          <td th:text="${board.bidx}"></td>
+          <td th:text="${board.getId}"></td>
           <th scope="row">조회수</th>
           <td th:text="${board.viewcnt}"></td>
         </tr>
         <tr>
           <th scope="row">제목</th>
-          <td colspan="3" id="title" name="title" th:text="${board.title}"/></td>
+          <td colspan="3" id="title" name="title" class="title" th:text="${board.title}"/></td>
         </tr>
         <tr>
           <td colspan="4" class="view_text" th:utext="${board.content}">
@@ -28,26 +28,25 @@
         </tr>
         </tbody>
       </table>
-      <input type="hidden" name="bidx" th:value="${board.bidx}">
+      <input type="hidden" name="bidx" th:value="${board.getId}">
     </form>
-  </div>
 
-  <div class="container">
-    <a th:each="list : ${board.fileList}" th:text="|${list.originalFileName}(${list.fileSize} kb)|"></a>
-  </div>
+    <div class="container">
+      <a th:each="list : ${board.fileList}" th:text="|${list.originalFileName}(${list.fileSize} kb)|"></a>
+    </div>
 
-  <div class="btn-under-group" align="right">
-      <button class="btn btn-primary" id="list">LIST</button>
-      <!--
-      <button class="btn btn-primary" id="edit">EDIT</button>
-      -->
-      <button class="btn btn-primary" id="delete">DELETE</button>
+    <div class="btn-detail">
+        <button class="btn-com2" id="list">LIST</button>
+        <!--
+        <button class="btn btn-primary" id="edit">EDIT</button>
+        -->
+        <button class="btn-com2" id="delete">DELETE</button>
+    </div>
   </div>
-
   <div class="container">
     <form name="commentInsertForm">
       <div class="comment-group">
-        <input type="hidden" name="bidx" th:value="${board.bidx}"/>
+        <input type="hidden" name="bidx" th:value="${board.getId}"/>
         <input type="text" class="comment-insert" id="comcontent" name="comcontent" placeholder="COMMENT">
         <button class="btn-com" type="button" name="commentInsertBtn">SUBMIT</button>
       </div>
@@ -62,10 +61,9 @@
 
 
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript">
     $(document).ready(function(){
-      $("#list").on("click", function(){
+      $("#list").click(function(){
         location.href = "/board";
       });
 
@@ -81,9 +79,7 @@
         frm.submit();
       });
     })
-  </script>
 
-  <script type="text/javascript">
     var bidx = [[${board.bidx}]];
 
     $('[name=commentInsertBtn]').click(function(){

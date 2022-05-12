@@ -6,7 +6,7 @@ import java.util.List;
 
 @Data
 public class BoardDto {
-    private int bidx;
+    private int id;
     private String title;
     private String content;
     private String writer;
