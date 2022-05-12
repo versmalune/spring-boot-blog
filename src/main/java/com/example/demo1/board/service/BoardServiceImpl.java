@@ -31,13 +31,13 @@ public class BoardServiceImpl implements BoardService {
         }
     }
     @Override
-    public BoardDto selectBoardDetail(int bidx) throws Exception {
-        BoardDto board = boardMapper.selectBoardDetail(bidx);
-        List<BoardFileDto> fileList = boardMapper.selectBoardFileList(bidx);
+    public BoardDto selectBoardDetail(int id) throws Exception {
+        BoardDto board = boardMapper.selectBoardDetail(id);
+        List<BoardFileDto> fileList = boardMapper.selectBoardFileList(id);
         System.out.println(fileList);
         board.setFileList(fileList);
         System.out.println(board);
-        boardMapper.updateHitCount(bidx);
+        boardMapper.updateHitCount(id);
         return board;
     }
     @Override
@@ -45,7 +45,7 @@ public class BoardServiceImpl implements BoardService {
         boardMapper.updateBoard(board);
     }
     @Override
-    public void deleteBoard(int bidx) throws Exception {
-        boardMapper.deleteBoard(bidx);
+    public void deleteBoard(int id) throws Exception {
+        boardMapper.deleteBoard(id);
     }
 }

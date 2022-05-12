@@ -10,10 +10,10 @@ import java.util.List;
 public interface BoardMapper {
     List<BoardDto> selectBoardList() throws Exception;
     void insertBoard(BoardDto board) throws Exception;
-    void updateHitCount(int bidx) throws Exception;
-    BoardDto selectBoardDetail(int bidx) throws Exception;
+    void updateHitCount(int id) throws Exception;
+    BoardDto selectBoardDetail(int id) throws Exception;
     void updateBoard(BoardDto board) throws Exception;
-    void deleteBoard(int bidx) throws Exception;
+    void deleteBoard(int id) throws Exception;
     void insertBoardFileList(List<BoardFileDto> list) throws Exception;
-    List<BoardFileDto> selectBoardFileList(int bidx) throws Exception;
+    List<BoardFileDto> selectBoardFileList(int id) throws Exception;
 }

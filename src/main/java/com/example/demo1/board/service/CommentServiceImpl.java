@@ -12,8 +12,8 @@ public class CommentServiceImpl implements CommentService {
     @Autowired
     private CommentMapper commentMapper;
     @Override
-    public List<CommentDto> commentListService(int bidx) throws Exception {
-        return commentMapper.commentList(bidx);
+    public List<CommentDto> commentListService(int bid) throws Exception {
+        return commentMapper.commentList(bid);
     }
     @Override
     public int insertCommentService(CommentDto comment) throws Exception {
@@ -24,7 +24,7 @@ public class CommentServiceImpl implements CommentService {
         return commentMapper.commentUpdate(comment);
     }
     @Override
-    public int deleteCommentService(int cidx) throws Exception {
-        return commentMapper.commentDelete(cidx);
+    public int deleteCommentService(int id) throws Exception {
+        return commentMapper.commentDelete(id);
     }
 }

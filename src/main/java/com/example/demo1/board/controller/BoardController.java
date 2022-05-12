@@ -12,41 +12,42 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import java.util.List;
 
 @Controller
+@RequestMapping("/board")
 public class BoardController {
     @Autowired
     private BoardService boardService;
 
-    @RequestMapping("/board")
+    @RequestMapping("")
     public ModelAndView boardList() throws Exception {
         ModelAndView mv = new ModelAndView("boardList");
         List<BoardDto> list = boardService.selectBoardList();
         mv.addObject("list", list);
         return mv;
     }
-    @RequestMapping("/board/openBoardWrite")
+    @RequestMapping("/openBoardWrite")
     public String boardWrite() throws Exception {
         return "/boardWrite";
     }
-    @RequestMapping("/board/insertBoard")
+    @RequestMapping("/insertBoard")
     public String insertBoard(@ModelAttribute BoardDto board, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception {
         boardService.insertBoard(board, multipartHttpServletRequest);
         return "redirect:/board";
     }
-    @RequestMapping("/board/openBoardDetail")
-    public ModelAndView openBoardDetail(@RequestParam int bidx) throws Exception {
+    @RequestMapping("/openBoardDetail")
+    public ModelAndView openBoardDetail(@RequestParam int id) throws Exception {
         ModelAndView mv = new ModelAndView("boardDetail");
-        BoardDto board = boardService.selectBoardDetail(bidx);
+        BoardDto board = boardService.selectBoardDetail(id);
         mv.addObject("board", board);
         return mv;
     }
-    @RequestMapping("/board/updateBoard")
+    @RequestMapping("/updateBoard")
     public String updateBoard(BoardDto board) throws Exception {
         boardService.updateBoard(board);
         return "redirect:/board";
     }
-    @RequestMapping("/board/deleteBoard")
-    public String deleteBoard(int bidx) throws Exception {
-        boardService.deleteBoard(bidx);
+    @RequestMapping("/deleteBoard")
+    public String deleteBoard(int id) throws Exception {
+        boardService.deleteBoard(id);
         return "redirect:/board";
     }
 }

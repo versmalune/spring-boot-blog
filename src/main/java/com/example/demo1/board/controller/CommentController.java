@@ -20,29 +20,29 @@ public class CommentController {
 
     @RequestMapping("/list")
     @ResponseBody
-    public List<CommentDto> commentList(@RequestParam int bidx) throws Exception {
-        return commentService.commentListService(bidx);
+    public List<CommentDto> commentList(@RequestParam int id) throws Exception {
+        return commentService.commentListService(id);
     }
     @RequestMapping("/insert")
     @ResponseBody
-    public int commentInsert(@RequestParam int bidx, @RequestParam String comcontent) throws Exception {
+    public int commentInsert(@RequestParam int bid, @RequestParam String comcontent) throws Exception {
         CommentDto comment = new CommentDto();
-        comment.setBid(bidx);
+        comment.setBid(bid);
         comment.setComcontent(comcontent);
         comment.setComwriter("testuser");
         return commentService.insertCommentService(comment);
     }
     @RequestMapping("/update")
     @ResponseBody
-    private int commentUpdate(@RequestParam int cidx, @RequestParam String comcontent) throws Exception {
+    private int commentUpdate(@RequestParam int id, @RequestParam String comcontent) throws Exception {
         CommentDto comment = new CommentDto();
-        comment.setId(cidx);
+        comment.setId(id);
         comment.setComcontent(comcontent);
         return commentService.updateCommentService(comment);
     }
-    @RequestMapping("/delete/{cidx}")
+    @RequestMapping("/delete/{id}")
     @ResponseBody
-    private int commentDelete(@PathVariable int cidx) throws Exception{
-        return commentService.deleteCommentService(cidx);
+    private int commentDelete(@PathVariable int id) throws Exception{
+        return commentService.deleteCommentService(id);
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 public interface BoardService {
     List<BoardDto> selectBoardList() throws Exception;
     void insertBoard(BoardDto board, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception;
-    BoardDto selectBoardDetail(int bidx) throws Exception;
+    BoardDto selectBoardDetail(int id) throws Exception;
     void updateBoard(BoardDto board) throws Exception;
-    void deleteBoard(int bidx) throws Exception;
+    void deleteBoard(int id) throws Exception;
 }

@@ -15,7 +15,7 @@ import java.util.List;
 
 @Component
 public class FileUtils {
-    public List<BoardFileDto> parseFileInfo(int bidx, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception {
+    public List<BoardFileDto> parseFileInfo(int bid, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception {
         if (ObjectUtils.isEmpty(multipartHttpServletRequest)) {
             return null;
         }
@@ -57,7 +57,7 @@ public class FileUtils {
 
                     newFileName = Long.toString(System.nanoTime()) + originalFileExtension;
                     BoardFileDto boardFile = new BoardFileDto();
-                    boardFile.setBid(bidx);
+                    boardFile.setBid(bid);
                     boardFile.setFileSize(multipartFile.getSize());
                     boardFile.setOriginalFileName(multipartFile.getOriginalFilename());
                     boardFile.setStoredFilePath(path + "/" + newFileName);
